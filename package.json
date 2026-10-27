@@ -4,7 +4,7 @@
   "description": "A baby passing by on your computer screen, based on the game Desktop goose",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --check demo-web.js && node --check tests/browser-qa.cjs",
     "start": "electron .",
     "build": "electron-builder build --win --publish never",
     "deploy": "electron-builder build --win --publish always"

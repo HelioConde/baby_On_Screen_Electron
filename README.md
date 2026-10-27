@@ -1,47 +1,25 @@
-<div align="center">
-  <h1>👶 Baby On Screen — Protótipo Electron</h1>
-  <p><strong>A primeira experiência de mascote virtual que acompanha a área de trabalho e precisa de cuidados.</strong></p>
-  <p><img alt="Electron" src="https://img.shields.io/badge/Electron-9.x-47848F?logo=electron&logoColor=white"> <img alt="Status" src="https://img.shields.io/badge/status-vers%C3%A3o%20hist%C3%B3rica-64748b"></p>
-  <p><a href="https://github.com/HelioConde/babyOnScreen"><strong>Projeto atual</strong></a> · <a href="https://github.com/HelioConde/babyOnScreen/releases/latest"><strong>Baixar versão recente</strong></a></p>
-</div>
+# Baby On Screen — legado Electron e demonstração web
 
-## Sobre esta versão
+O **Baby On Screen 0.0.1** é um protótipo histórico de mascote virtual. A interface de navegador foi adaptada para GitHub Pages e funciona sem instalar o Electron.
 
-Este repositório representa o **Baby On Screen 0.0.1**, construído com Electron, JavaScript e jQuery. A ideia já era criar uma presença virtual na tela do usuário, com animações, interações e uma janela de desktop.
+## Demonstração web
+- Alimente, troque, deixe dormir e brinque com o personagem.
+- Visualize quatro indicadores com atualização em tempo real.
+- Progresso guardado somente no navegador via `localStorage`, com reinício confirmado.
+- Áudio opcional e foco no teclado; responsivo e sem banco de dados.
+- Navegue em `https://helioconde.github.io/baby_On_Screen_Electron/` após a publicação do GitHub Pages.
 
-É um **protótipo legado**, não a edição estável mais recente. Para jogar, instalar e conhecer as funcionalidades atuais, prefira [**Baby On Screen**](https://github.com/HelioConde/babyOnScreen).
+## Preservação do Electron
+O `index.html` original foi copiado para `desktop-legacy.html` e o `main.js` foi ajustado para abrir o arquivo legado. O restante do código jQuery e Electron continua no repositório e na branch `archive/electron-original-20261027`.
 
-## Arquivos principais
-
-| Caminho | Conteúdo |
-| --- | --- |
-| `main.js` | Processo principal Electron |
-| `index.html` | Interface |
-| `demo.js` / `demo.css` | Experiências de tela |
-| `electron-transparency-mouse-fix*.js` | Recurso histórico de transparência e interação |
-| `sprits/` | Sprites |
-| `som/` | Áudio |
-| `package.json` | Dependências e comandos originais |
-
-## Executar para estudo
-
-Requer Node.js/npm compatíveis com a versão histórica do Electron:
-
+Para rodar o Electron original em estudo:
 ```bash
-git clone https://github.com/HelioConde/baby_On_Screen_Electron.git
-cd baby_On_Screen_Electron
 npm install
 npm start
 ```
+Compatibilidade da versão antiga Electron 9 com máquinas atuais **não homologada**. Para o aplicativo mais novo, procure [babyOnScreen](https://github.com/HelioConde/babyOnScreen).
 
-O comando `npm start` invoca `electron .`. O `package.json` inclui `npm run build` para Windows, mas **a construção e a compatibilidade atual não foram verificadas nesta revisão**.
+## QA
+O GitHub Actions valida scripts e Playwright em múltiplas resoluções com screenshots. Não reproduz overlay transparente, atualização automática ou integração com desktop na versão web.
 
-**O script `npm test` é apenas um placeholder que encerra com erro; não há suíte de testes implementada nele.**
-
-## Por que preservar o histórico?
-
-Esta versão registra as primeiras escolhas de interface, animação e comportamento da janela. Ela ajuda a acompanhar a evolução do produto, mas **não deve ser instalada como alternativa à versão moderna**, principalmente sem auditar suas dependências antigas.
-
-**[Acessar a versão atual](https://github.com/HelioConde/babyOnScreen)**
-
-Desenvolvido por [Hélio Conde](https://github.com/HelioConde).
+Documentação em [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md).
