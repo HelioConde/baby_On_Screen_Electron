@@ -19,7 +19,7 @@ function createWindow() {
     mainWindow.maximize()
     mainWindow.setAlwaysOnTop(true, 'screen');
     mainWindow.setResizable(false);
-    mainWindow.loadFile('index.html');
+    mainWindow.loadFile('desktop-legacy.html');
     mainWindow.on('closed', function () {
         mainWindow = null;
     });

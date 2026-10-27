@@ -1,0 +1,46 @@
+name: Baby On Screen — browser demo Playwright QA
+on:
+  pull_request:
+    branches: [gh-pages]
+  push:
+    branches: [gh-pages]
+    paths:
+      - "index.html"
+      - "demo-web.*"
+      - "sprits/**"
+      - "tests/**"
+      - ".github/workflows/browser-qa.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: baby-web-qa-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar sintaxe e preservação do Electron
+        run: |
+          node --check demo-web.js
+          node --check tests/browser-qa.cjs
+          node --check main.js
+          test -f desktop-legacy.html
+          test -f sprits/char1.png
+      - name: Instalar navegador para QA
+        run: |
+          npm install --no-save --package-lock=false playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Executar testes e capturas
+        run: node tests/browser-qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: baby-browser-qa
+          path: screenshots/
+          if-no-files-found: ignore

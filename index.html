@@ -1,107 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baby On Screen</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#15172b" />
+  <meta name="description" content="Baby On Screen: conheça o protótipo original em uma demonstração web de mascote virtual. Sem login, sem servidor e sem banco de dados." />
+  <meta property="og:title" content="Baby On Screen — O primeiro mascote virtual" />
+  <meta property="og:description" content="Uma demonstração interativa do projeto histórico Baby On Screen, com cuidados e progresso guardados neste navegador." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="./demo-web.css" />
+  <title>Baby On Screen — Demonstração do protótipo</title>
+  <script src="./demo-web.js" defer></script>
 </head>
-<script src="./jquery.min.js"></script>
-<script>window.$ = window.jQuery = require('jquery');</script>
-<script src="demo.js"></script>
-<link rel="stylesheet" href="demo.css">
-<style>
-    #notification {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 200px;
-        padding: 20px;
-        border-radius: 5px;
-        background-color: white;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    #version {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: -1;
-        color: whitesmoke;
-    }
-
-    .hidden {
-        display: none;
-    }
-</style>
-
-<body class="no-ptr">
-    <main>
-    </main>
-    <div id="char" class="front2 widget ptr">
-    </div>
-    <div id="developer">
-        <div id="left"></div>
-        <div id="right"></div>
-    </div>
-    <div id="status">
-    </div>
-    <div id="obj">
-    </div>
-    <div class="navBar ptr">
-        <span class="button medicine">MEDICINE</span>
-        <span class="button diaper">DIAPER</span>
-        <span class="button sleep">SLEEP</span>
-        <span class="button hunger">HUNGER</span>
-    </div>
-    <div class="bar button ptr">
-        Action
-    </div>
-
-    <p id="version"></p>
-    <div id="notification" class="hidden ptr">
-        <p id="message"></p>
-        <button id="close-button" onClick="closeNotification()">
-            Close
-        </button>
-        <button id="restart-button" onClick="restartApp()" class="hidden">
-            Restart
-        </button>
-    </div>
-    <script>
-        const { ipcRenderer } = require('electron');
-        const version = document.getElementById('version');
-        const notification = document.getElementById('notification');
-        const message = document.getElementById('message');
-        const restartButton = document.getElementById('restart-button');
-
-        ipcRenderer.send('app_version');
-        ipcRenderer.on('app_version', (event, arg) => {
-            ipcRenderer.removeAllListeners('app_version');
-            version.innerText = 'Version ' + arg.version;
-        });
-
-        ipcRenderer.on('update_available', () => {
-            ipcRenderer.removeAllListeners('update_available');
-            message.innerText = 'A new update is available. Downloading now...';
-            notification.classList.remove('hidden');
-        });
-
-        ipcRenderer.on('update_downloaded', () => {
-            ipcRenderer.removeAllListeners('update_downloaded');
-            message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
-            restartButton.classList.remove('hidden');
-            notification.classList.remove('hidden');
-        });
-
-        function closeNotification() {
-            notification.classList.add('hidden');
-        }
-
-        function restartApp() {
-            ipcRenderer.send('restart_app');
-        }
-    </script>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para conteúdo</a>
+  <header class="header">
+    <nav class="shell nav" aria-label="Navegação principal">
+      <a href="./" class="brand"><span class="brand-icon" aria-hidden="true">✦</span><span>BABY <strong>ON SCREEN</strong><small>PROTÓTIPO ORIGINAL</small></span></a>
+      <div class="nav-links"><a href="#jogar">Experimentar</a><a href="#historia">História</a><a href="https://github.com/HelioConde/babyOnScreen" target="_blank" rel="noopener noreferrer">Versão atual ↗</a></div>
+    </nav>
+  </header>
+  <main id="conteudo">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span> DEMONSTRAÇÃO WEB · EDIÇÃO HISTÓRICA</p>
+        <h1 id="hero-title">Um pequeno amigo, <span>muitas histórias.</span></h1>
+        <p>O começo do Baby On Screen: um mascote virtual criado para acompanhar a área de trabalho. Nesta versão web você pode cuidar dele sem instalar nada.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#jogar">Cuidar do Baby <span aria-hidden="true">↓</span></a>
+          <a class="button secondary" href="https://github.com/HelioConde/babyOnScreen" target="_blank" rel="noopener noreferrer">Projeto atual <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="limitation">O modo web não acessa a área de trabalho nem executa Electron. Seus progressos de demonstração ficam apenas neste navegador.</p>
+      </div>
+      <div class="hero-art" role="img" aria-label="Cenário ilustrado em pixel art com um mascote do projeto original">
+        <span class="art-cloud cloud-one" aria-hidden="true">✳</span><span class="art-cloud cloud-two" aria-hidden="true">✧</span>
+        <div class="baby-shell"><div class="baby-pixel large-pixel" aria-hidden="true"></div></div>
+        <span class="art-label">HELLO, BABY! <span aria-hidden="true">♡</span></span>
+      </div>
+    </section>
+    <section id="jogar" class="demo-shell shell" aria-labelledby="demo-title">
+      <div class="section-heading"><div><p class="eyebrow">UM POUCO DE CARINHO</p><h2 id="demo-title">Cuide do seu mascote</h2><p>Alimente, troque, descanse e brinque. Todos os comandos funcionam no navegador, sem conta e sem banco.</p></div><span class="demo-label">MODO DEMONSTRAÇÃO</span></div>
+      <div class="play-grid">
+        <div class="pet-stage">
+          <div class="stage-decor decor-a" aria-hidden="true">✦</div><div class="stage-decor decor-b" aria-hidden="true">✧</div>
+          <div id="baby" class="baby-pixel pose-idle" role="img" aria-label="Mascote Baby, pronto para brincar"></div>
+          <div class="stage-shadow" aria-hidden="true"></div>
+          <div class="status-bubble" role="status" aria-live="polite" id="mood">Que bom te ver!</div>
+          <p class="stage-help">O personagem usa o sprite original do projeto histórico.</p>
+        </div>
+        <div class="pet-panel">
+          <div class="panel-top"><div><span class="micro-label">STATUS DO BABY</span><h3>Como está seu amigo?</h3></div><span id="pet-status" class="happy-badge">Feliz</span></div>
+          <div class="meters">
+            <label for="saciedade"><span>🍎 Saciedade</span><strong id="saciedade-number">75%</strong></label><progress id="saciedade" max="100" value="75">75%</progress>
+            <label for="energia"><span>🌙 Energia</span><strong id="energia-number">80%</strong></label><progress id="energia" max="100" value="80">80%</progress>
+            <label for="higiene"><span>✨ Higiene</span><strong id="higiene-number">80%</strong></label><progress id="higiene" max="100" value="80">80%</progress>
+            <label for="carinho"><span>💜 Carinho</span><strong id="carinho-number">85%</strong></label><progress id="carinho" max="100" value="85">85%</progress>
+          </div>
+          <div class="actions" role="group" aria-label="Cuidados do Baby">
+            <button type="button" data-action="alimentar"><span aria-hidden="true">🍼</span> Alimentar</button>
+            <button type="button" data-action="trocar"><span aria-hidden="true">🧷</span> Trocar</button>
+            <button type="button" data-action="dormir"><span aria-hidden="true">💤</span> Dormir</button>
+            <button type="button" data-action="brincar"><span aria-hidden="true">🧸</span> Brincar</button>
+          </div>
+          <div class="panel-bottom">
+            <label class="sound"><input id="sound-toggle" type="checkbox" /><span>Ativar sons</span></label>
+            <button class="reset" type="button" id="reset-demo">Reiniciar exemplo</button>
+          </div>
+          <p id="save-info" class="save-info" role="status" aria-live="polite">Progresso salvo somente neste navegador.</p>
+        </div>
+      </div>
+    </section>
+    <section id="historia" class="story-band" aria-labelledby="story-title">
+      <div class="shell story-layout">
+        <div><p class="eyebrow">UMA IDEIA QUE EVOLUIU</p><h2 id="story-title">Da janelinha na tela para <span>novas experiências.</span></h2></div>
+        <div><p>O protótipo original foi desenvolvido com Electron, JavaScript e jQuery. Ele explorava transparência da janela, movimentação do personagem, sprites e cuidados com o mascote.</p><p>O código Electron foi mantido neste repositório em <code>desktop-legacy.html</code> e <code>main.js</code>, além da branch de arquivo. O navegador executa outra interface, propositalmente limitada.</p><a href="https://github.com/HelioConde/babyOnScreen" class="story-link" target="_blank" rel="noopener noreferrer">Conhecer a evolução do projeto ↗</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="shell footer-inside"><span>Baby On Screen · Protótipo histórico · Sem banco de dados</span><a href="https://github.com/HelioConde/baby_On_Screen_Electron" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a></div></footer>
 </body>
-
 </html>
